@@ -1,4 +1,5 @@
 import { NavLink, Outlet } from 'react-router'
+import ThemeSwitch from './ThemeSwitch.jsx'
 import './AppLayout.css'
 
 const navigationItems = [
@@ -23,20 +24,23 @@ function AppLayout() {
             <span>Tableau</span>
           </NavLink>
 
-          <nav className="primary-navigation" aria-label="주요 메뉴">
-            {navigationItems.map(({ label, to }) => (
-              <NavLink
-                className={({ isActive }) =>
-                  `navigation-link body2 ${isActive ? 'active bold' : 'medium'}`
-                }
-                end
-                key={to}
-                to={to}
-              >
-                {label}
-              </NavLink>
-            ))}
-          </nav>
+          <div className="header-actions">
+            <nav className="primary-navigation" aria-label="주요 메뉴">
+              {navigationItems.map(({ label, to }) => (
+                <NavLink
+                  className={({ isActive }) =>
+                    `navigation-link body2 ${isActive ? 'active bold' : 'medium'}`
+                  }
+                  end
+                  key={to}
+                  to={to}
+                >
+                  {label}
+                </NavLink>
+              ))}
+            </nav>
+            <ThemeSwitch />
+          </div>
         </div>
       </header>
 
