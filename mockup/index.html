@@ -1,0 +1,1664 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tableau — 메뉴 관리 서비스 목업</title>
+    <style>
+      /* Source: montage.tokens.json — this mockup references only these token variables. */
+      :root {
+        --color-semantic-static-white: #ffffff;
+        --color-semantic-static-black: #000000;
+        --color-semantic-primary-normal: #0066ff;
+        --color-semantic-primary-strong: #005eeb;
+        --color-semantic-primary-heavy: #0054d1;
+        --color-semantic-label-normal: #171719;
+        --color-semantic-label-strong: #000000;
+        --color-semantic-label-neutral: #2e2f33e0;
+        --color-semantic-label-alternative: #37383c9c;
+        --color-semantic-label-assistive: #37383c47;
+        --color-semantic-label-disable: #37383c29;
+        --color-semantic-background-normal-normal: #ffffff;
+        --color-semantic-background-normal-alternative: #f7f7f8;
+        --color-semantic-background-elevated-normal: #ffffff;
+        --color-semantic-background-elevated-alternative: #f7f7f8;
+        --color-semantic-background-status-negative: #ff424214;
+        --color-semantic-background-status-cautionary: #ff920014;
+        --color-semantic-background-status-positive: #00bf4014;
+        --color-semantic-interaction-inactive: #989ba2;
+        --color-semantic-interaction-disable: #f4f4f5;
+        --color-semantic-line-normal-normal: #70737c38;
+        --color-semantic-line-normal-neutral: #70737c29;
+        --color-semantic-line-normal-alternative: #70737c14;
+        --color-semantic-line-solid-normal: #e1e2e4;
+        --color-semantic-line-solid-neutral: #eaebec;
+        --color-semantic-line-solid-alternative: #f4f4f5;
+        --color-semantic-line-primary-normal: #0066ff47;
+        --color-semantic-line-status-negative-normal: #ff42426e;
+        --color-semantic-status-positive: #00bf40;
+        --color-semantic-status-cautionary: #ff9200;
+        --color-semantic-status-negative: #ff4242;
+        --color-semantic-accent-background-red-orange: #ff5e00;
+        --color-semantic-accent-background-lime: #58cf04;
+        --color-semantic-accent-background-cyan: #00bdde;
+        --color-semantic-accent-background-light-blue: #00aeff;
+        --color-semantic-accent-background-violet: #6541f2;
+        --color-semantic-accent-background-purple: #cb59ff;
+        --color-semantic-accent-background-pink: #f553da;
+        --color-semantic-accent-foreground-red: #e52222;
+        --color-semantic-accent-foreground-red-orange: #f55a00;
+        --color-semantic-accent-foreground-orange: #d17600;
+        --color-semantic-accent-foreground-lime: #429e00;
+        --color-semantic-accent-foreground-green: #009632;
+        --color-semantic-accent-foreground-cyan: #0098b2;
+        --color-semantic-accent-foreground-blue: #005eeb;
+        --color-semantic-fill-normal: #70737c14;
+        --color-semantic-fill-strong: #70737c29;
+        --color-semantic-fill-alternative: #70737c0d;
+        --color-semantic-material-dimmer: #17171985;
+
+        --shadow-semantic-elevation-shadow-normal-xsmall: 0px 1px 2px -1px #1717171a;
+        --shadow-semantic-elevation-shadow-normal-small: 0px 2px 4px -2px #1717170f, 0px 4px 6px -1px #1717170f;
+        --shadow-semantic-elevation-shadow-normal-medium: 0px 4px 6px -2px #17171712, 0px 10px 15px -3px #17171712;
+        --shadow-semantic-elevation-shadow-normal-large: 0px 6px 10px -4px #17171714, 0px 16px 24px -6px #17171714;
+
+        --spacing-0: 0px;
+        --spacing-1: 1px;
+        --spacing-2: 2px;
+        --spacing-4: 4px;
+        --spacing-6: 6px;
+        --spacing-8: 8px;
+        --spacing-10: 10px;
+        --spacing-12: 12px;
+        --spacing-14: 14px;
+        --spacing-16: 16px;
+        --spacing-20: 20px;
+        --spacing-24: 24px;
+        --spacing-32: 32px;
+        --spacing-40: 40px;
+        --spacing-48: 48px;
+        --spacing-56: 56px;
+        --spacing-64: 64px;
+        --spacing-72: 72px;
+        --spacing-80: 80px;
+
+        --radius-3: 3px;
+        --radius-6: 6px;
+        --radius-8: 8px;
+        --radius-10: 10px;
+        --radius-12: 12px;
+        --radius-16: 16px;
+        --radius-20: 20px;
+        --radius-999: 999px;
+        --radius-1000: 1000px;
+        --radius-50pct: 50%;
+
+        --breakpoint-lg: 1200px;
+        --breakpoint-md: 992px;
+        --breakpoint-sm: 768px;
+
+        --type-display2-font-size: 2.5rem;
+        --type-display2-line-height: 3.25rem;
+        --type-display2-letter-spacing: -0.0282em;
+        --type-display2-weight-bold: 700;
+        --type-title1-font-size: 2rem;
+        --type-title1-line-height: 2.75rem;
+        --type-title1-letter-spacing: -0.0253em;
+        --type-title1-weight-bold: 700;
+        --type-title2-font-size: 1.75rem;
+        --type-title2-line-height: 2.375rem;
+        --type-title2-letter-spacing: -0.0236em;
+        --type-title2-weight-bold: 700;
+        --type-title3-font-size: 1.5rem;
+        --type-title3-line-height: 2rem;
+        --type-title3-letter-spacing: -0.023em;
+        --type-title3-weight-bold: 700;
+        --type-heading1-font-size: 1.375rem;
+        --type-heading1-line-height: 1.875rem;
+        --type-heading1-letter-spacing: -0.0194em;
+        --type-heading1-weight-bold: 600;
+        --type-heading2-font-size: 1.25rem;
+        --type-heading2-line-height: 1.75rem;
+        --type-heading2-letter-spacing: -0.012em;
+        --type-heading2-weight-bold: 600;
+        --type-headline1-font-size: 1.125rem;
+        --type-headline1-line-height: 1.625rem;
+        --type-headline1-letter-spacing: -0.002em;
+        --type-headline1-weight-bold: 600;
+        --type-body1-font-size: 1rem;
+        --type-body1-line-height: 1.5rem;
+        --type-body1-letter-spacing: 0.0057em;
+        --type-body1-weight-regular: 400;
+        --type-body1-weight-medium: 500;
+        --type-body1-weight-bold: 600;
+        --type-body2-font-size: 0.9375rem;
+        --type-body2-line-height: 1.375rem;
+        --type-body2-letter-spacing: 0.0096em;
+        --type-body2-weight-regular: 400;
+        --type-body2-weight-medium: 500;
+        --type-body2-weight-bold: 600;
+        --type-label1-font-size: 0.875rem;
+        --type-label1-line-height: 1.25rem;
+        --type-label1-letter-spacing: 0.0145em;
+        --type-label1-weight-regular: 400;
+        --type-label1-weight-medium: 500;
+        --type-label1-weight-bold: 600;
+        --type-label2-font-size: 0.8125rem;
+        --type-label2-line-height: 1.125rem;
+        --type-label2-letter-spacing: 0.0194em;
+        --type-label2-weight-medium: 500;
+        --type-label2-weight-bold: 600;
+        --type-caption1-font-size: 0.75rem;
+        --type-caption1-line-height: 1rem;
+        --type-caption1-letter-spacing: 0.0252em;
+        --type-caption1-weight-medium: 500;
+        --type-caption1-weight-bold: 600;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: var(--spacing-0);
+        background: var(--color-semantic-background-normal-alternative);
+        color: var(--color-semantic-label-normal);
+        font-family: Pretendard, "Noto Sans KR", Arial, sans-serif;
+        font-size: var(--type-body1-font-size);
+        line-height: var(--type-body1-line-height);
+        letter-spacing: var(--type-body1-letter-spacing);
+      }
+
+      button,
+      input,
+      select {
+        color: inherit;
+        font: inherit;
+      }
+
+      button,
+      a,
+      select {
+        cursor: pointer;
+      }
+
+      button {
+        border: var(--spacing-0);
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      svg {
+        display: block;
+      }
+
+      .sr-only {
+        position: absolute;
+        width: var(--spacing-1);
+        height: var(--spacing-1);
+        padding: var(--spacing-0);
+        margin: calc(var(--spacing-1) * -1);
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: var(--spacing-0);
+      }
+
+      .type-display2,
+      .type-title1,
+      .type-title2,
+      .type-title3,
+      .type-heading1,
+      .type-heading2,
+      .type-headline1,
+      .type-body1,
+      .type-body2,
+      .type-label1,
+      .type-label2,
+      .type-caption1 {
+        margin: var(--spacing-0);
+      }
+
+      .type-display2 {
+        font-size: var(--type-display2-font-size);
+        line-height: var(--type-display2-line-height);
+        letter-spacing: var(--type-display2-letter-spacing);
+        font-weight: var(--type-display2-weight-bold);
+      }
+
+      .type-title1 {
+        font-size: var(--type-title1-font-size);
+        line-height: var(--type-title1-line-height);
+        letter-spacing: var(--type-title1-letter-spacing);
+        font-weight: var(--type-title1-weight-bold);
+      }
+
+      .type-title2 {
+        font-size: var(--type-title2-font-size);
+        line-height: var(--type-title2-line-height);
+        letter-spacing: var(--type-title2-letter-spacing);
+        font-weight: var(--type-title2-weight-bold);
+      }
+
+      .type-title3 {
+        font-size: var(--type-title3-font-size);
+        line-height: var(--type-title3-line-height);
+        letter-spacing: var(--type-title3-letter-spacing);
+        font-weight: var(--type-title3-weight-bold);
+      }
+
+      .type-heading1 {
+        font-size: var(--type-heading1-font-size);
+        line-height: var(--type-heading1-line-height);
+        letter-spacing: var(--type-heading1-letter-spacing);
+        font-weight: var(--type-heading1-weight-bold);
+      }
+
+      .type-heading2 {
+        font-size: var(--type-heading2-font-size);
+        line-height: var(--type-heading2-line-height);
+        letter-spacing: var(--type-heading2-letter-spacing);
+        font-weight: var(--type-heading2-weight-bold);
+      }
+
+      .type-headline1 {
+        font-size: var(--type-headline1-font-size);
+        line-height: var(--type-headline1-line-height);
+        letter-spacing: var(--type-headline1-letter-spacing);
+        font-weight: var(--type-headline1-weight-bold);
+      }
+
+      .type-body1 {
+        font-size: var(--type-body1-font-size);
+        line-height: var(--type-body1-line-height);
+        letter-spacing: var(--type-body1-letter-spacing);
+      }
+
+      .type-body2 {
+        font-size: var(--type-body2-font-size);
+        line-height: var(--type-body2-line-height);
+        letter-spacing: var(--type-body2-letter-spacing);
+      }
+
+      .type-label1 {
+        font-size: var(--type-label1-font-size);
+        line-height: var(--type-label1-line-height);
+        letter-spacing: var(--type-label1-letter-spacing);
+      }
+
+      .type-label2 {
+        font-size: var(--type-label2-font-size);
+        line-height: var(--type-label2-line-height);
+        letter-spacing: var(--type-label2-letter-spacing);
+      }
+
+      .type-caption1 {
+        font-size: var(--type-caption1-font-size);
+        line-height: var(--type-caption1-line-height);
+        letter-spacing: var(--type-caption1-letter-spacing);
+      }
+
+      .mockup-index {
+        position: sticky;
+        top: var(--spacing-0);
+        z-index: 10;
+        display: flex;
+        justify-content: center;
+        gap: var(--spacing-8);
+        padding: var(--spacing-12) var(--spacing-24);
+        background: var(--color-semantic-background-normal-normal);
+        border-bottom: var(--spacing-1) solid var(--color-semantic-line-solid-neutral);
+        box-shadow: var(--shadow-semantic-elevation-shadow-normal-xsmall);
+      }
+
+      .mockup-index a {
+        padding: var(--spacing-8) var(--spacing-12);
+        color: var(--color-semantic-label-neutral);
+        border-radius: var(--radius-8);
+        font-size: var(--type-label2-font-size);
+        line-height: var(--type-label2-line-height);
+        letter-spacing: var(--type-label2-letter-spacing);
+        font-weight: var(--type-label2-weight-bold);
+      }
+
+      .mockup-index a:hover {
+        color: var(--color-semantic-primary-normal);
+        background: var(--color-semantic-fill-normal);
+      }
+
+      .canvas {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-64);
+        padding: var(--spacing-40) var(--spacing-24) var(--spacing-80);
+      }
+
+      .screen-wrap {
+        width: min(100%, var(--breakpoint-lg));
+        margin-inline: auto;
+        scroll-margin-top: var(--spacing-80);
+      }
+
+      .screen-label {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-10);
+        margin-bottom: var(--spacing-12);
+        color: var(--color-semantic-label-alternative);
+      }
+
+      .screen-number {
+        display: inline-grid;
+        width: var(--spacing-24);
+        height: var(--spacing-24);
+        place-items: center;
+        color: var(--color-semantic-static-white);
+        background: var(--color-semantic-label-normal);
+        border-radius: var(--radius-999);
+        font-weight: var(--type-caption1-weight-bold);
+      }
+
+      .screen {
+        overflow: hidden;
+        background: var(--color-semantic-background-normal-normal);
+        border: var(--spacing-1) solid var(--color-semantic-line-solid-normal);
+        border-radius: var(--radius-20);
+        box-shadow: var(--shadow-semantic-elevation-shadow-normal-large);
+      }
+
+      .app-header {
+        display: flex;
+        min-height: var(--spacing-72);
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--spacing-24);
+        padding: var(--spacing-0) var(--spacing-40);
+        background: var(--color-semantic-background-normal-normal);
+        border-bottom: var(--spacing-1) solid var(--color-semantic-line-solid-neutral);
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-10);
+        font-size: var(--type-headline1-font-size);
+        line-height: var(--type-headline1-line-height);
+        letter-spacing: var(--type-headline1-letter-spacing);
+        font-weight: var(--type-headline1-weight-bold);
+      }
+
+      .brand-mark {
+        position: relative;
+        width: var(--spacing-32);
+        height: var(--spacing-32);
+        overflow: hidden;
+        background: var(--color-semantic-label-normal);
+        border-radius: var(--radius-10);
+      }
+
+      .brand-mark::before,
+      .brand-mark::after {
+        position: absolute;
+        content: "";
+        background: var(--color-semantic-background-normal-normal);
+        border-radius: var(--radius-999);
+      }
+
+      .brand-mark::before {
+        width: var(--spacing-8);
+        height: var(--spacing-8);
+        top: var(--spacing-6);
+        left: var(--spacing-6);
+      }
+
+      .brand-mark::after {
+        width: var(--spacing-16);
+        height: var(--spacing-8);
+        right: var(--spacing-4);
+        bottom: var(--spacing-6);
+      }
+
+      .nav {
+        display: flex;
+        align-self: stretch;
+        gap: var(--spacing-24);
+      }
+
+      .nav a {
+        position: relative;
+        display: flex;
+        align-items: center;
+        color: var(--color-semantic-label-alternative);
+        font-size: var(--type-body2-font-size);
+        line-height: var(--type-body2-line-height);
+        letter-spacing: var(--type-body2-letter-spacing);
+        font-weight: var(--type-body2-weight-medium);
+      }
+
+      .nav a.active {
+        color: var(--color-semantic-label-normal);
+        font-weight: var(--type-body2-weight-bold);
+      }
+
+      .nav a.active::after {
+        position: absolute;
+        right: var(--spacing-0);
+        bottom: var(--spacing-0);
+        left: var(--spacing-0);
+        height: var(--spacing-2);
+        content: "";
+        background: var(--color-semantic-label-normal);
+        border-radius: var(--radius-999);
+      }
+
+      .header-side {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-12);
+      }
+
+      .icon-button {
+        display: inline-grid;
+        width: var(--spacing-40);
+        height: var(--spacing-40);
+        place-items: center;
+        background: var(--color-semantic-background-normal-normal);
+        border: var(--spacing-1) solid var(--color-semantic-line-solid-normal);
+        border-radius: var(--radius-10);
+      }
+
+      .icon-button svg,
+      .input-icon svg,
+      .status-icon svg,
+      .button svg {
+        width: var(--spacing-20);
+        height: var(--spacing-20);
+      }
+
+      .user-chip {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-8);
+        padding: var(--spacing-6) var(--spacing-10) var(--spacing-6) var(--spacing-6);
+        background: var(--color-semantic-background-normal-alternative);
+        border-radius: var(--radius-999);
+      }
+
+      .avatar {
+        display: inline-grid;
+        width: var(--spacing-32);
+        height: var(--spacing-32);
+        place-items: center;
+        color: var(--color-semantic-static-white);
+        background: var(--color-semantic-accent-background-violet);
+        border-radius: var(--radius-50pct);
+        font-size: var(--type-caption1-font-size);
+        font-weight: var(--type-caption1-weight-bold);
+      }
+
+      .button {
+        display: inline-flex;
+        min-height: var(--spacing-40);
+        align-items: center;
+        justify-content: center;
+        gap: var(--spacing-8);
+        padding: var(--spacing-10) var(--spacing-16);
+        white-space: nowrap;
+        border-radius: var(--radius-10);
+        font-size: var(--type-label1-font-size);
+        line-height: var(--type-label1-line-height);
+        letter-spacing: var(--type-label1-letter-spacing);
+        font-weight: var(--type-label1-weight-bold);
+      }
+
+      .button-primary {
+        color: var(--color-semantic-static-white);
+        background: var(--color-semantic-primary-normal);
+      }
+
+      .button-dark {
+        color: var(--color-semantic-static-white);
+        background: var(--color-semantic-label-normal);
+      }
+
+      .button-secondary {
+        color: var(--color-semantic-label-normal);
+        background: var(--color-semantic-background-normal-normal);
+        border: var(--spacing-1) solid var(--color-semantic-line-solid-normal);
+      }
+
+      .button-ghost {
+        color: var(--color-semantic-label-neutral);
+        background: var(--color-semantic-fill-normal);
+      }
+
+      .button-danger {
+        color: var(--color-semantic-static-white);
+        background: var(--color-semantic-status-negative);
+      }
+
+      .button-danger-ghost {
+        color: var(--color-semantic-status-negative);
+        background: var(--color-semantic-background-status-negative);
+      }
+
+      .button-lg {
+        min-height: var(--spacing-48);
+        padding-inline: var(--spacing-24);
+        font-size: var(--type-body1-font-size);
+      }
+
+      .app-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--spacing-24);
+        padding: var(--spacing-24) var(--spacing-40);
+        color: var(--color-semantic-label-alternative);
+        background: var(--color-semantic-background-normal-alternative);
+        border-top: var(--spacing-1) solid var(--color-semantic-line-solid-neutral);
+        font-size: var(--type-label2-font-size);
+        line-height: var(--type-label2-line-height);
+        letter-spacing: var(--type-label2-letter-spacing);
+      }
+
+      .footer-links {
+        display: flex;
+        gap: var(--spacing-20);
+      }
+
+      .layout-hero {
+        display: grid;
+        min-height: 520px;
+        grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+        align-items: center;
+        gap: var(--spacing-64);
+        padding: var(--spacing-72) var(--spacing-64);
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--spacing-8);
+        margin-bottom: var(--spacing-16);
+        color: var(--color-semantic-primary-strong);
+        font-size: var(--type-label1-font-size);
+        line-height: var(--type-label1-line-height);
+        letter-spacing: var(--type-label1-letter-spacing);
+        font-weight: var(--type-label1-weight-bold);
+      }
+
+      .eyebrow::before {
+        width: var(--spacing-8);
+        height: var(--spacing-8);
+        content: "";
+        background: var(--color-semantic-primary-normal);
+        border-radius: var(--radius-999);
+      }
+
+      .hero-copy {
+        max-width: 580px;
+      }
+
+      .hero-copy h1 span {
+        color: var(--color-semantic-primary-normal);
+      }
+
+      .hero-copy > p {
+        margin: var(--spacing-20) var(--spacing-0) var(--spacing-32);
+        color: var(--color-semantic-label-alternative);
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--spacing-12);
+      }
+
+      .hero-board {
+        position: relative;
+        min-height: 360px;
+        padding: var(--spacing-24);
+        background: var(--color-semantic-label-normal);
+        border-radius: var(--radius-20);
+        box-shadow: var(--shadow-semantic-elevation-shadow-normal-large);
+      }
+
+      .board-label {
+        color: var(--color-semantic-interaction-inactive);
+      }
+
+      .board-title {
+        max-width: 240px;
+        margin-top: var(--spacing-8);
+        color: var(--color-semantic-static-white);
+      }
+
+      .board-status {
+        position: absolute;
+        top: var(--spacing-24);
+        right: var(--spacing-24);
+        display: inline-flex;
+        align-items: center;
+        gap: var(--spacing-6);
+        color: var(--color-semantic-static-white);
+      }
+
+      .board-status::before {
+        width: var(--spacing-8);
+        height: var(--spacing-8);
+        content: "";
+        background: var(--color-semantic-status-positive);
+        border-radius: var(--radius-50pct);
+      }
+
+      .metric-grid {
+        position: absolute;
+        right: var(--spacing-24);
+        bottom: var(--spacing-24);
+        left: var(--spacing-24);
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--spacing-10);
+      }
+
+      .metric-card {
+        min-height: 136px;
+        padding: var(--spacing-16);
+        background: var(--color-semantic-background-normal-normal);
+        border-radius: var(--radius-12);
+      }
+
+      .metric-label {
+        color: var(--color-semantic-label-alternative);
+      }
+
+      .metric-value {
+        display: block;
+        margin-top: var(--spacing-12);
+        color: var(--color-semantic-label-normal);
+      }
+
+      .metric-caption {
+        display: block;
+        margin-top: var(--spacing-6);
+        color: var(--color-semantic-label-alternative);
+      }
+
+      .page-content {
+        padding: var(--spacing-48) var(--spacing-40) var(--spacing-56);
+      }
+
+      .page-heading {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: var(--spacing-24);
+        margin-bottom: var(--spacing-32);
+      }
+
+      .page-heading p {
+        margin: var(--spacing-8) var(--spacing-0) var(--spacing-0);
+        color: var(--color-semantic-label-alternative);
+      }
+
+      .filters {
+        display: grid;
+        grid-template-columns: minmax(240px, 1.4fr) repeat(3, minmax(150px, 0.7fr)) auto;
+        gap: var(--spacing-10);
+        padding: var(--spacing-16);
+        margin-bottom: var(--spacing-32);
+        background: var(--color-semantic-background-normal-alternative);
+        border-radius: var(--radius-16);
+      }
+
+      .field-shell {
+        display: flex;
+        min-height: var(--spacing-48);
+        align-items: center;
+        gap: var(--spacing-10);
+        padding: var(--spacing-0) var(--spacing-14);
+        background: var(--color-semantic-background-normal-normal);
+        border: var(--spacing-1) solid var(--color-semantic-line-solid-normal);
+        border-radius: var(--radius-10);
+      }
+
+      .field-shell input,
+      .field-shell select {
+        width: 100%;
+        min-width: var(--spacing-0);
+        padding: var(--spacing-0);
+        background: transparent;
+        border: var(--spacing-0);
+        outline: none;
+        appearance: none;
+        font-size: var(--type-body2-font-size);
+        line-height: var(--type-body2-line-height);
+        letter-spacing: var(--type-body2-letter-spacing);
+      }
+
+      .field-shell input::placeholder {
+        color: var(--color-semantic-label-assistive);
+      }
+
+      .input-icon,
+      .select-chevron {
+        display: grid;
+        flex: none;
+        color: var(--color-semantic-label-alternative);
+        place-items: center;
+      }
+
+      .select-chevron svg {
+        width: var(--spacing-16);
+        height: var(--spacing-16);
+      }
+
+      .result-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--spacing-16);
+        margin-bottom: var(--spacing-16);
+      }
+
+      .result-count strong {
+        color: var(--color-semantic-primary-normal);
+      }
+
+      .sort-button {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--spacing-6);
+        padding: var(--spacing-8) var(--spacing-10);
+        color: var(--color-semantic-label-neutral);
+        background: transparent;
+        font-size: var(--type-label1-font-size);
+        line-height: var(--type-label1-line-height);
+      }
+
+      .menu-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: var(--spacing-16);
+      }
+
+      .menu-card {
+        overflow: hidden;
+        background: var(--color-semantic-background-normal-normal);
+        border: var(--spacing-1) solid var(--color-semantic-line-solid-neutral);
+        border-radius: var(--radius-16);
+        transition: transform 160ms ease, box-shadow 160ms ease;
+      }
+
+      .menu-card:hover {
+        transform: translateY(calc(var(--spacing-4) * -1));
+        box-shadow: var(--shadow-semantic-elevation-shadow-normal-medium);
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--spacing-4);
+        padding: var(--spacing-4) var(--spacing-8);
+        border-radius: var(--radius-6);
+        font-size: var(--type-caption1-font-size);
+        line-height: var(--type-caption1-line-height);
+        letter-spacing: var(--type-caption1-letter-spacing);
+        font-weight: var(--type-caption1-weight-bold);
+      }
+
+      .badge-positive {
+        color: var(--color-semantic-accent-foreground-green);
+        background: var(--color-semantic-background-status-positive);
+      }
+
+      .badge-neutral {
+        color: var(--color-semantic-label-alternative);
+        background: var(--color-semantic-fill-strong);
+      }
+
+      .badge-primary {
+        color: var(--color-semantic-primary-strong);
+        background: var(--color-semantic-line-primary-normal);
+      }
+
+      .card-content {
+        display: flex;
+        min-height: 210px;
+        flex-direction: column;
+        padding: var(--spacing-20);
+      }
+
+      .card-top,
+      .card-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--spacing-8);
+      }
+
+      .card-top {
+        margin-bottom: var(--spacing-24);
+      }
+
+      .menu-code {
+        color: var(--color-semantic-label-alternative);
+      }
+
+      .card-footer {
+        margin-top: auto;
+        padding-top: var(--spacing-24);
+        border-top: var(--spacing-1) solid var(--color-semantic-line-solid-neutral);
+      }
+
+      .menu-price {
+        margin: var(--spacing-0);
+        font-weight: var(--type-body1-weight-bold);
+      }
+
+      .order-status {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--spacing-6);
+        color: var(--color-semantic-label-alternative);
+      }
+
+      .order-status::before {
+        width: var(--spacing-6);
+        height: var(--spacing-6);
+        content: "";
+        background: var(--color-semantic-status-positive);
+        border-radius: var(--radius-50pct);
+      }
+
+      .order-status.off::before {
+        background: var(--color-semantic-interaction-inactive);
+      }
+
+      .pagination {
+        display: flex;
+        justify-content: center;
+        gap: var(--spacing-6);
+        margin-top: var(--spacing-32);
+      }
+
+      .page-button {
+        display: inline-grid;
+        width: var(--spacing-40);
+        height: var(--spacing-40);
+        place-items: center;
+        color: var(--color-semantic-label-neutral);
+        background: var(--color-semantic-background-normal-normal);
+        border-radius: var(--radius-8);
+        font-size: var(--type-label1-font-size);
+        line-height: var(--type-label1-line-height);
+        font-weight: var(--type-label1-weight-bold);
+      }
+
+      .page-button.active {
+        color: var(--color-semantic-static-white);
+        background: var(--color-semantic-label-normal);
+      }
+
+      .detail-layout {
+        display: grid;
+        grid-template-columns: 360px minmax(0, 1fr);
+        gap: var(--spacing-40);
+      }
+
+      .detail-summary {
+        display: flex;
+        min-height: 460px;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: var(--spacing-32);
+        color: var(--color-semantic-static-white);
+        background: var(--color-semantic-label-normal);
+        border-radius: var(--radius-20);
+      }
+
+      .detail-summary .detail-code {
+        color: var(--color-semantic-interaction-inactive);
+      }
+
+      .detail-summary-title {
+        margin-top: var(--spacing-12);
+      }
+
+      .summary-stat-list {
+        display: grid;
+        gap: var(--spacing-0);
+      }
+
+      .summary-stat {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--spacing-16);
+        padding: var(--spacing-14) var(--spacing-0);
+        border-top: var(--spacing-1) solid var(--color-semantic-line-normal-normal);
+      }
+
+      .summary-stat span {
+        color: var(--color-semantic-interaction-inactive);
+      }
+
+      .breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-8);
+        margin-bottom: var(--spacing-24);
+        color: var(--color-semantic-label-alternative);
+      }
+
+      .detail-info {
+        display: flex;
+        flex-direction: column;
+        padding: var(--spacing-8) var(--spacing-0);
+      }
+
+      .detail-title-row {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: var(--spacing-12);
+      }
+
+      .detail-price {
+        margin-bottom: var(--spacing-32);
+      }
+
+      .definition-list {
+        margin: var(--spacing-0);
+        border-top: var(--spacing-1) solid var(--color-semantic-line-solid-neutral);
+      }
+
+      .definition-row {
+        display: grid;
+        grid-template-columns: 120px 1fr;
+        gap: var(--spacing-16);
+        padding: var(--spacing-16) var(--spacing-0);
+        border-bottom: var(--spacing-1) solid var(--color-semantic-line-solid-neutral);
+      }
+
+      .definition-row dt {
+        color: var(--color-semantic-label-alternative);
+      }
+
+      .definition-row dd {
+        margin: var(--spacing-0);
+        font-weight: var(--type-body2-weight-bold);
+      }
+
+      .detail-actions {
+        display: flex;
+        gap: var(--spacing-10);
+        margin-top: auto;
+        padding-top: var(--spacing-32);
+      }
+
+      .detail-actions .button {
+        flex: 1;
+      }
+
+      .dialog-demo {
+        position: relative;
+      }
+
+      .dialog-demo::after {
+        position: absolute;
+        inset: var(--spacing-0);
+        z-index: 1;
+        content: "";
+        background: var(--color-semantic-material-dimmer);
+      }
+
+      .dialog {
+        position: absolute;
+        top: var(--spacing-80);
+        left: 50%;
+        z-index: 2;
+        width: min(calc(100% - var(--spacing-40)), 420px);
+        padding: var(--spacing-24);
+        background: var(--color-semantic-background-elevated-normal);
+        border-radius: var(--radius-20);
+        box-shadow: var(--shadow-semantic-elevation-shadow-normal-large);
+        transform: translateX(-50%);
+      }
+
+      .dialog-icon {
+        display: grid;
+        width: var(--spacing-48);
+        height: var(--spacing-48);
+        margin-bottom: var(--spacing-16);
+        color: var(--color-semantic-status-negative);
+        background: var(--color-semantic-background-status-negative);
+        border-radius: var(--radius-50pct);
+        place-items: center;
+      }
+
+      .dialog-icon svg {
+        width: var(--spacing-24);
+        height: var(--spacing-24);
+      }
+
+      .dialog p {
+        margin: var(--spacing-8) var(--spacing-0) var(--spacing-24);
+        color: var(--color-semantic-label-alternative);
+      }
+
+      .dialog-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: var(--spacing-8);
+      }
+
+      .form-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 320px;
+        gap: var(--spacing-40);
+      }
+
+      .mode-switch {
+        display: inline-flex;
+        gap: var(--spacing-4);
+        padding: var(--spacing-4);
+        margin-bottom: var(--spacing-32);
+        background: var(--color-semantic-fill-normal);
+        border-radius: var(--radius-12);
+      }
+
+      .mode-switch button {
+        padding: var(--spacing-8) var(--spacing-16);
+        color: var(--color-semantic-label-alternative);
+        background: transparent;
+        border-radius: var(--radius-8);
+        font-size: var(--type-label1-font-size);
+        line-height: var(--type-label1-line-height);
+        font-weight: var(--type-label1-weight-bold);
+      }
+
+      .mode-switch button.active {
+        color: var(--color-semantic-label-normal);
+        background: var(--color-semantic-background-normal-normal);
+        box-shadow: var(--shadow-semantic-elevation-shadow-normal-xsmall);
+      }
+
+      .form-section {
+        padding-bottom: var(--spacing-32);
+        margin-bottom: var(--spacing-32);
+        border-bottom: var(--spacing-1) solid var(--color-semantic-line-solid-neutral);
+      }
+
+      .form-section-title {
+        margin-bottom: var(--spacing-20);
+      }
+
+      .form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--spacing-20) var(--spacing-16);
+      }
+
+      .form-field {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-8);
+      }
+
+      .form-field.full {
+        grid-column: 1 / -1;
+      }
+
+      .form-label {
+        display: flex;
+        justify-content: space-between;
+        gap: var(--spacing-8);
+        font-size: var(--type-label1-font-size);
+        line-height: var(--type-label1-line-height);
+        letter-spacing: var(--type-label1-letter-spacing);
+        font-weight: var(--type-label1-weight-bold);
+      }
+
+      .required {
+        color: var(--color-semantic-status-negative);
+      }
+
+      .text-input {
+        width: 100%;
+        background: var(--color-semantic-background-normal-normal);
+        border: var(--spacing-1) solid var(--color-semantic-line-solid-normal);
+        border-radius: var(--radius-12);
+        outline: none;
+      }
+
+      .text-input {
+        min-height: var(--spacing-48);
+        padding: var(--spacing-0) var(--spacing-14);
+      }
+
+      .input-error {
+        border-color: var(--color-semantic-line-status-negative-normal);
+      }
+
+      .validation {
+        color: var(--color-semantic-status-negative);
+      }
+
+      .helper {
+        color: var(--color-semantic-label-alternative);
+      }
+
+      .radio-row {
+        display: flex;
+        gap: var(--spacing-16);
+        min-height: var(--spacing-48);
+        align-items: center;
+      }
+
+      .radio-label {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-8);
+      }
+
+      .radio {
+        display: grid;
+        width: var(--spacing-20);
+        height: var(--spacing-20);
+        place-items: center;
+        border: var(--spacing-1) solid var(--color-semantic-line-normal-normal);
+        border-radius: var(--radius-50pct);
+      }
+
+      .radio.checked {
+        border-color: var(--color-semantic-primary-normal);
+      }
+
+      .radio.checked::after {
+        width: var(--spacing-10);
+        height: var(--spacing-10);
+        content: "";
+        background: var(--color-semantic-primary-normal);
+        border-radius: var(--radius-50pct);
+      }
+
+      .form-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: var(--spacing-10);
+      }
+
+      .form-preview {
+        position: sticky;
+        top: var(--spacing-80);
+        align-self: start;
+        padding: var(--spacing-20);
+        background: var(--color-semantic-background-normal-alternative);
+        border-radius: var(--radius-16);
+      }
+
+      .preview-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: var(--spacing-16);
+      }
+
+      .preview-card {
+        overflow: hidden;
+        background: var(--color-semantic-background-normal-normal);
+        border: var(--spacing-1) solid var(--color-semantic-line-solid-neutral);
+        border-radius: var(--radius-16);
+        box-shadow: var(--shadow-semantic-elevation-shadow-normal-small);
+      }
+
+      .preview-card .card-content {
+        min-height: 220px;
+      }
+
+      .state-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: var(--spacing-16);
+      }
+
+      .state-card {
+        min-height: 350px;
+        padding: var(--spacing-24);
+        border: var(--spacing-1) solid var(--color-semantic-line-solid-neutral);
+        border-radius: var(--radius-16);
+      }
+
+      .state-card > .type-label2 {
+        color: var(--color-semantic-label-alternative);
+        font-weight: var(--type-label2-weight-bold);
+      }
+
+      .state-center {
+        display: flex;
+        min-height: 270px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .status-icon {
+        display: grid;
+        width: var(--spacing-56);
+        height: var(--spacing-56);
+        margin-bottom: var(--spacing-16);
+        color: var(--color-semantic-primary-normal);
+        background: var(--color-semantic-line-primary-normal);
+        border-radius: var(--radius-50pct);
+        place-items: center;
+      }
+
+      .status-icon.error {
+        color: var(--color-semantic-status-negative);
+        background: var(--color-semantic-background-status-negative);
+      }
+
+      .state-center p {
+        max-width: 240px;
+        margin: var(--spacing-8) var(--spacing-0) var(--spacing-20);
+        color: var(--color-semantic-label-alternative);
+      }
+
+      .skeleton-list {
+        display: grid;
+        gap: var(--spacing-14);
+        margin-top: var(--spacing-24);
+      }
+
+      .skeleton-card {
+        padding: var(--spacing-16);
+        border: var(--spacing-1) solid var(--color-semantic-line-solid-neutral);
+        border-radius: var(--radius-12);
+      }
+
+      .skeleton,
+      .skeleton::after {
+        border-radius: var(--radius-6);
+      }
+
+      .skeleton {
+        position: relative;
+        overflow: hidden;
+        background: var(--color-semantic-fill-strong);
+      }
+
+      .skeleton::after {
+        position: absolute;
+        inset: var(--spacing-0);
+        content: "";
+        background: var(--color-semantic-fill-normal);
+        transform: translateX(-100%);
+        animation: shimmer 1.4s infinite;
+      }
+
+      .skeleton-copy {
+        display: grid;
+        gap: var(--spacing-8);
+      }
+
+      .skeleton-line {
+        height: var(--spacing-12);
+      }
+
+      .skeleton-line.short {
+        width: 56%;
+      }
+
+      .skeleton-line.tiny {
+        width: 36%;
+        height: var(--spacing-8);
+      }
+
+      @keyframes shimmer {
+        to {
+          transform: translateX(100%);
+        }
+      }
+
+      @media (max-width: 992px) {
+        .layout-hero,
+        .detail-layout,
+        .form-layout {
+          grid-template-columns: 1fr;
+        }
+
+        .filters {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .filters > :first-child {
+          grid-column: 1 / -1;
+        }
+
+        .state-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .form-preview {
+          position: static;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .mockup-index {
+          justify-content: flex-start;
+          overflow-x: auto;
+        }
+
+        .app-header {
+          padding-inline: var(--spacing-20);
+        }
+
+        .nav,
+        .user-chip span,
+        .footer-links {
+          display: none;
+        }
+
+        .page-content,
+        .layout-hero {
+          padding: var(--spacing-32) var(--spacing-20);
+        }
+
+        .layout-hero {
+          min-height: auto;
+        }
+
+        .hero-board {
+          min-height: 320px;
+        }
+
+        .page-heading {
+          align-items: stretch;
+          flex-direction: column;
+        }
+
+        .filters,
+        .form-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .filters > :first-child,
+        .form-field.full {
+          grid-column: auto;
+        }
+
+        .detail-summary {
+          min-height: 340px;
+        }
+
+        .app-footer {
+          padding-inline: var(--spacing-20);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        .skeleton::after {
+          animation: none;
+        }
+
+        .menu-card {
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="mockup-index" aria-label="목업 화면 바로가기">
+      <a href="#layout">01 레이아웃</a>
+      <a href="#list">02 메뉴 목록</a>
+      <a href="#detail">03 메뉴 상세</a>
+      <a href="#form">04 메뉴 폼</a>
+      <a href="#states">05 상태 모음</a>
+    </nav>
+
+    <main class="canvas">
+      <section class="screen-wrap" id="layout" aria-labelledby="layout-title">
+        <div class="screen-label type-label1">
+          <span class="screen-number type-caption1">01</span>
+          <span id="layout-title">공통 레이아웃 · 헤더 / 내비게이션 / 푸터</span>
+        </div>
+        <div class="screen">
+          <header class="app-header">
+            <a class="brand" href="#layout" aria-label="Tableau 홈">
+              <span class="brand-mark" aria-hidden="true"></span>
+              <span>Tableau</span>
+            </a>
+            <nav class="nav" aria-label="주요 메뉴">
+              <a class="active" href="#list">메뉴</a>
+              <a href="#states">카테고리</a>
+              <a href="#form">메뉴 등록</a>
+            </nav>
+            <div class="header-side">
+              <button class="icon-button" type="button" aria-label="알림">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10 21h4"/></svg>
+              </button>
+              <div class="user-chip type-label2">
+                <span class="avatar">MK</span>
+                <span>관리자</span>
+              </div>
+            </div>
+          </header>
+
+          <div class="layout-hero">
+            <div class="hero-copy">
+              <div class="eyebrow">오늘도 매끄러운 메뉴 운영</div>
+              <h1 class="type-display2">좋은 메뉴는<br /><span>한눈에</span> 관리됩니다.</h1>
+              <p class="type-body1">검색부터 등록, 판매 상태 변경까지. 매장의 모든 메뉴를 단순하고 정확하게 관리하세요.</p>
+              <div class="hero-actions">
+                <a class="button button-dark button-lg" href="#list">메뉴 둘러보기</a>
+                <a class="button button-secondary button-lg" href="#form">새 메뉴 등록</a>
+              </div>
+            </div>
+            <div class="hero-board" aria-label="메뉴 운영 현황">
+              <p class="board-label type-label2">TODAY'S BOARD</p>
+              <h2 class="board-title type-title2">오늘의 메뉴 운영 현황</h2>
+              <span class="board-status type-caption1">서버 연결됨</span>
+              <div class="metric-grid">
+                <div class="metric-card"><span class="metric-label type-caption1">전체 메뉴</span><strong class="metric-value type-title2">42</strong><span class="metric-caption type-caption1">등록됨</span></div>
+                <div class="metric-card"><span class="metric-label type-caption1">주문 가능</span><strong class="metric-value type-title2">36</strong><span class="metric-caption type-caption1">판매 중</span></div>
+                <div class="metric-card"><span class="metric-label type-caption1">주문 불가</span><strong class="metric-value type-title2">6</strong><span class="metric-caption type-caption1">판매 중지</span></div>
+              </div>
+            </div>
+          </div>
+
+          <footer class="app-footer">
+            <span>© 2026 Tableau Menu Studio</span>
+            <div class="footer-links"><a href="#layout">서비스 안내</a><a href="#layout">이용약관</a><a href="#layout">문의하기</a></div>
+          </footer>
+        </div>
+      </section>
+
+      <section class="screen-wrap" id="list" aria-labelledby="list-title">
+        <div class="screen-label type-label1">
+          <span class="screen-number type-caption1">02</span>
+          <span id="list-title">메뉴 목록 · 검색 / 가격 / 카테고리 필터 / 카드 / 페이지네이션</span>
+        </div>
+        <div class="screen">
+          <header class="app-header">
+            <a class="brand" href="#layout"><span class="brand-mark" aria-hidden="true"></span><span>Tableau</span></a>
+            <nav class="nav"><a class="active" href="#list">메뉴</a><a href="#states">카테고리</a><a href="#form">메뉴 등록</a></nav>
+            <a class="button button-primary" href="#form">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+              메뉴 등록
+            </a>
+          </header>
+          <div class="page-content">
+            <div class="page-heading">
+              <div><h2 class="type-title1">전체 메뉴</h2><p class="type-body2">판매 메뉴를 조회하고 상태를 관리합니다.</p></div>
+            </div>
+
+            <form class="filters" aria-label="메뉴 검색 필터">
+              <label class="field-shell">
+                <span class="input-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></span>
+                <span class="sr-only">메뉴 이름</span>
+                <input type="search" value="라떼" aria-label="메뉴 이름 검색" />
+              </label>
+              <label class="field-shell">
+                <span class="sr-only">최소 가격</span>
+                <input type="text" placeholder="최소 가격" aria-label="최소 가격" />
+                <span class="type-label1">원</span>
+              </label>
+              <label class="field-shell">
+                <span class="sr-only">최대 가격</span>
+                <input type="text" value="10,000" aria-label="최대 가격" />
+                <span class="type-label1">원</span>
+              </label>
+              <label class="field-shell">
+                <span class="sr-only">카테고리</span>
+                <select aria-label="카테고리"><option>음료 · 전체</option></select>
+                <span class="select-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m7 10 5 5 5-5"/></svg></span>
+              </label>
+              <button class="button button-dark" type="button">검색</button>
+            </form>
+
+            <div class="result-bar">
+              <p class="result-count type-body2">총 <strong>12개</strong> 메뉴</p>
+              <button class="sort-button" type="button">최신 등록순 <span aria-hidden="true">↓</span></button>
+            </div>
+
+            <div class="menu-grid">
+              <article class="menu-card">
+                <div class="card-content"><div class="card-top"><span class="badge badge-primary">음료 · 커피</span><span class="menu-code type-caption1">MENU #12</span></div><h3 class="type-headline1">바닐라 빈 라떼</h3><div class="card-footer"><p class="menu-price type-body1">5,800원</p><span class="order-status type-caption1">주문 가능</span></div></div>
+              </article>
+              <article class="menu-card">
+                <div class="card-content"><div class="card-top"><span class="badge badge-primary">음료 · 커피</span><span class="menu-code type-caption1">MENU #18</span></div><h3 class="type-headline1">솔티드 카라멜 라떼</h3><div class="card-footer"><p class="menu-price type-body1">6,200원</p><span class="order-status type-caption1">주문 가능</span></div></div>
+              </article>
+              <article class="menu-card">
+                <div class="card-content"><div class="card-top"><span class="badge badge-primary">음료 · 논커피</span><span class="menu-code type-caption1">MENU #24</span></div><h3 class="type-headline1">말차 크림 라떼</h3><div class="card-footer"><p class="menu-price type-body1">6,500원</p><span class="order-status off type-caption1">주문 불가</span></div></div>
+              </article>
+              <article class="menu-card">
+                <div class="card-content"><div class="card-top"><span class="badge badge-primary">음료 · 티</span><span class="menu-code type-caption1">MENU #31</span></div><h3 class="type-headline1">딸기 허브 라떼</h3><div class="card-footer"><p class="menu-price type-body1">6,800원</p><span class="order-status type-caption1">주문 가능</span></div></div>
+              </article>
+            </div>
+
+            <nav class="pagination" aria-label="페이지 이동">
+              <button class="page-button" type="button" aria-label="이전 페이지">‹</button><button class="page-button active" type="button">1</button><button class="page-button" type="button">2</button><button class="page-button" type="button">3</button><button class="page-button" type="button" aria-label="다음 페이지">›</button>
+            </nav>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen-wrap" id="detail" aria-labelledby="detail-title">
+        <div class="screen-label type-label1">
+          <span class="screen-number type-caption1">03</span>
+          <span id="detail-title">메뉴 상세 · 정보 / 수정·삭제 / 삭제 확인 다이얼로그</span>
+        </div>
+        <div class="screen dialog-demo">
+          <header class="app-header">
+            <a class="brand" href="#layout"><span class="brand-mark" aria-hidden="true"></span><span>Tableau</span></a>
+            <nav class="nav"><a class="active" href="#list">메뉴</a><a href="#states">카테고리</a><a href="#form">메뉴 등록</a></nav>
+            <div class="user-chip type-label2"><span class="avatar">MK</span><span>관리자</span></div>
+          </header>
+          <div class="page-content">
+            <div class="breadcrumb type-label1"><span>메뉴</span><span>›</span><strong>바닐라 빈 라떼</strong></div>
+            <div class="detail-layout">
+              <aside class="detail-summary">
+                <div><span class="detail-code type-label2">MENU #12</span><h2 class="detail-summary-title type-title1">바닐라 빈 라떼</h2></div>
+                <div class="summary-stat-list type-body2"><div class="summary-stat"><span>가격</span><strong>5,800원</strong></div><div class="summary-stat"><span>카테고리</span><strong>커피</strong></div><div class="summary-stat"><span>주문 상태</span><strong>주문 가능</strong></div></div>
+              </aside>
+              <article class="detail-info">
+                <div class="detail-title-row"><div><span class="badge badge-primary">음료 · 커피</span><h2 class="type-title1">바닐라 빈 라떼</h2></div><span class="badge badge-positive">● 주문 가능</span></div>
+                <p class="detail-price type-title2">5,800원</p>
+                <dl class="definition-list type-body2">
+                  <div class="definition-row"><dt>메뉴 코드</dt><dd>12</dd></div>
+                  <div class="definition-row"><dt>상위 카테고리</dt><dd>음료</dd></div>
+                  <div class="definition-row"><dt>하위 카테고리</dt><dd>커피</dd></div>
+                  <div class="definition-row"><dt>주문 가능 여부</dt><dd>Y</dd></div>
+                </dl>
+                <div class="detail-actions"><a class="button button-secondary button-lg" href="#form">수정</a><button class="button button-danger-ghost button-lg" type="button">삭제</button></div>
+              </article>
+            </div>
+          </div>
+          <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="delete-title" aria-describedby="delete-desc">
+            <div class="dialog-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6M10 10v6M14 10v6"/></svg></div>
+            <h3 class="type-heading1" id="delete-title">이 메뉴를 삭제할까요?</h3>
+            <p class="type-body2" id="delete-desc">‘바닐라 빈 라떼’ 정보가 영구적으로 삭제됩니다. 이 작업은 되돌릴 수 없습니다.</p>
+            <div class="dialog-actions"><button class="button button-secondary" type="button">취소</button><button class="button button-danger" type="button">삭제하기</button></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen-wrap" id="form" aria-labelledby="form-title">
+        <div class="screen-label type-label1">
+          <span class="screen-number type-caption1">04</span>
+          <span id="form-title">메뉴 폼 · 등록/수정 공용 / 입력 검증 / 카드 미리보기</span>
+        </div>
+        <div class="screen">
+          <header class="app-header">
+            <a class="brand" href="#layout"><span class="brand-mark" aria-hidden="true"></span><span>Tableau</span></a>
+            <nav class="nav"><a href="#list">메뉴</a><a href="#states">카테고리</a><a class="active" href="#form">메뉴 등록</a></nav>
+            <div class="user-chip type-label2"><span class="avatar">MK</span><span>관리자</span></div>
+          </header>
+          <div class="page-content">
+            <div class="page-heading"><div><h2 class="type-title1">메뉴 정보 입력</h2><p class="type-body2">등록과 수정에 함께 사용하는 폼입니다. 필수 항목을 확인해 주세요.</p></div></div>
+            <div class="mode-switch" aria-label="폼 모드 예시"><button type="button">등록 모드</button><button class="active" type="button">수정 모드</button></div>
+            <div class="form-layout">
+              <form>
+                <section class="form-section">
+                  <h3 class="form-section-title type-heading2">기본 정보</h3>
+                  <div class="form-grid">
+                    <label class="form-field full"><span class="form-label"><span>메뉴 이름 <span class="required">*</span></span><span class="helper type-caption1">0 / 30</span></span><input class="text-input input-error" type="text" placeholder="메뉴 이름을 입력하세요" aria-invalid="true" aria-describedby="name-error" /><span class="validation type-caption1" id="name-error">메뉴 이름은 필수입니다.</span></label>
+                    <label class="form-field"><span class="form-label">가격 <span class="required">*</span></span><input class="text-input" type="text" value="5,800" /><span class="helper type-caption1">숫자만 입력해 주세요.</span></label>
+                    <label class="form-field"><span class="form-label">카테고리 <span class="required">*</span></span><span class="field-shell"><select><option>커피</option></select><span class="select-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m7 10 5 5 5-5"/></svg></span></span></label>
+                  </div>
+                </section>
+                <section class="form-section">
+                  <h3 class="form-section-title type-heading2">판매 설정</h3>
+                  <div class="form-field"><span class="form-label">주문 가능 여부</span><div class="radio-row"><label class="radio-label type-body2"><span class="radio checked"></span><input class="sr-only" type="radio" checked />주문 가능</label><label class="radio-label type-body2"><span class="radio"></span><input class="sr-only" type="radio" />주문 불가</label></div><span class="helper type-caption1">품절 시 주문 불가로 변경할 수 있습니다.</span></div>
+                </section>
+                <div class="form-actions"><button class="button button-secondary button-lg" type="button">취소</button><button class="button button-primary button-lg" type="button">변경사항 저장</button></div>
+              </form>
+              <aside class="form-preview" aria-label="메뉴 카드 미리보기">
+                <div class="preview-head"><h3 class="type-headline1">미리보기</h3><span class="type-caption1 helper">목록 카드</span></div>
+                <article class="preview-card"><div class="card-content"><div class="card-top"><span class="badge badge-primary">음료 · 커피</span><span class="menu-code type-caption1">MENU #12</span></div><h4 class="type-headline1">메뉴 이름</h4><div class="card-footer"><p class="menu-price type-body1">5,800원</p><span class="order-status type-caption1">주문 가능</span></div></div></article>
+              </aside>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen-wrap" id="states" aria-labelledby="states-title">
+        <div class="screen-label type-label1">
+          <span class="screen-number type-caption1">05</span>
+          <span id="states-title">상태 모음 · 빈 상태 / 오류 / 로딩 스켈레톤</span>
+        </div>
+        <div class="screen">
+          <header class="app-header">
+            <a class="brand" href="#layout"><span class="brand-mark" aria-hidden="true"></span><span>Tableau</span></a>
+            <nav class="nav"><a class="active" href="#list">메뉴</a><a href="#states">카테고리</a><a href="#form">메뉴 등록</a></nav>
+            <div class="user-chip type-label2"><span class="avatar">MK</span><span>관리자</span></div>
+          </header>
+          <div class="page-content">
+            <div class="page-heading"><div><h2 class="type-title1">화면 상태</h2><p class="type-body2">데이터 요청 결과에 따라 일관된 피드백을 제공합니다.</p></div></div>
+            <div class="state-grid">
+              <article class="state-card"><p class="type-label2">EMPTY</p><div class="state-center"><div class="status-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16v13H4zM8 4h8v3M8 11h8M8 15h5"/></svg></div><h3 class="type-headline1">조건에 맞는 메뉴가 없어요</h3><p class="type-body2">검색어나 필터를 바꾸면 더 많은 메뉴를 확인할 수 있습니다.</p><button class="button button-secondary" type="button">필터 초기화</button></div></article>
+              <article class="state-card"><p class="type-label2">ERROR</p><div class="state-center"><div class="status-icon error"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 17h.01"/></svg></div><h3 class="type-headline1">메뉴를 불러오지 못했어요</h3><p class="type-body2">잠시 후 다시 시도해 주세요. 문제가 계속되면 관리자에게 문의해 주세요.</p><button class="button button-dark" type="button">다시 시도</button></div></article>
+              <article class="state-card"><p class="type-label2">LOADING</p><div class="skeleton-list" aria-label="메뉴를 불러오는 중"><div class="skeleton-card"><div class="skeleton-copy"><div class="skeleton skeleton-line short"></div><div class="skeleton skeleton-line"></div><div class="skeleton skeleton-line tiny"></div></div></div><div class="skeleton-card"><div class="skeleton-copy"><div class="skeleton skeleton-line short"></div><div class="skeleton skeleton-line"></div><div class="skeleton skeleton-line tiny"></div></div></div><div class="skeleton-card"><div class="skeleton-copy"><div class="skeleton skeleton-line short"></div><div class="skeleton skeleton-line"></div><div class="skeleton skeleton-line tiny"></div></div></div></div><p class="helper type-body2">메뉴 정보를 불러오고 있습니다...</p></article>
+            </div>
+          </div>
+          <footer class="app-footer"><span>© 2026 Tableau Menu Studio</span><div class="footer-links"><a href="#layout">서비스 안내</a><a href="#layout">이용약관</a><a href="#layout">문의하기</a></div></footer>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
